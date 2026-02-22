@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masjid Jamia Rangwar
+  </title>
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon_1.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen">
+
+  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+  <header class="relative overflow-hidden pt-10 pb-8 px-4 text-center">
+    <!-- Decorative mosque SVG bg -->
+    <svg class="mosque-silhouette" width="500" height="180" viewBox="0 0 500 180" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="140" width="500" height="40"/>
+      <rect x="60" y="80" width="80" height="60"/>
+      <rect x="190" y="50" width="120" height="90"/>
+      <rect x="360" y="80" width="80" height="60"/>
+      <ellipse cx="100" cy="80" rx="40" ry="50"/>
+      <ellipse cx="250" cy="50" rx="60" ry="70"/>
+      <ellipse cx="400" cy="80" rx="40" ry="50"/>
+      <rect x="90" y="20" width="20" height="60"/>
+      <rect x="238" y="-10" width="24" height="65"/>
+      <rect x="390" y="20" width="20" height="60"/>
+      <!-- crescent atop minarets -->
+      <path d="M100 15 a10 10 0 1 1 0.01 0" stroke="white" fill="none" stroke-width="3"/>
+      <path d="M250 -15 a12 12 0 1 1 0.01 0" stroke="white" fill="none" stroke-width="3"/>
+      <path d="M400 15 a10 10 0 1 1 0.01 0" stroke="white" fill="none" stroke-width="3"/>
+    </svg>
+
+    <!-- Arabic greeting -->
+    <p class="font-arabic text-2xl text-gold mb-1 fade-in" style="color:var(--gold-light)">رَمَضَانُ مُبَارَك</p>
+
+    <div class="ornament-line mt-2 mb-4 max-w-xs mx-auto fade-in delay-1"><span>✦</span></div>
+
+    <h1 class="font-display text-3xl sm:text-4xl font-bold tracking-wide fade-in delay-1" style="color:#f0e8d0;">
+      Masjid Jamia Rangwar
+    </h1>
+    <p class="font-display text-sm tracking-widest mt-1 fade-in delay-2" style="color:var(--gold);">
+      RAMADAN 2026 &nbsp;·&nbsp; 1447 AH
+    </p>
+
+    <div class="ornament-line mt-4 mb-5 max-w-xs mx-auto fade-in delay-2"><span>☽</span></div>
+
+    <!-- Hijri date -->
+    <div class="flex justify-center fade-in delay-3">
+      <div class="hijri-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+        <span id="hijriDate">Loading Hijri date…</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════ MAIN ═══════════════════════════════ -->
+  <main class="max-w-xl mx-auto px-4 pb-16 space-y-5">
+
+    <!-- ── CLOCK ── -->
+    <section class="card p-6 text-center fade-in delay-2">
+      <p class="section-title">Current Time</p>
+
+      <!-- Digital -->
+      <div id="digitalWrapper">
+        <div id="digitalClock">
+          <span id="dH">00</span><span class="colon">:</span><span id="dM">00</span><span class="colon">:</span><span id="dS">00</span>
+        </div>
+        <p id="digitalDate" class="text-xs mt-1" style="color:rgba(240,232,208,0.5); letter-spacing:0.1em;"></p>
+      </div>
+
+      <!-- Analog (hidden by default) -->
+      <div id="analogWrapper" class="hidden flex justify-center">
+        <div id="analogClock" style="width:220px;height:220px;margin:0 auto;">
+          <!-- Numbers injected by JS -->
+          <div id="clockDot"></div>
+          <div class="hand hour-hand" id="hourHand" style="height:60px;margin-left:-2px;"></div>
+          <div class="hand min-hand"  id="minHand"  style="height:80px;margin-left:-1.5px;"></div>
+          <div class="hand sec-hand"  id="secHand"  style="height:88px;margin-left:-0.75px;"></div>
+        </div>
+      </div>
+
+      <div class="mt-4 flex justify-center">
+        <button id="clockToggle">⇄ Switch to Analog</button>
+      </div>
+    </section>
+
+    <!-- ── SEHRI / IFTAR ── -->
+    <section class="fade-in delay-3">
+      <p class="section-title mb-2 px-1">Sehri &amp; Iftar</p>
+      <div class="flex gap-3">
+        <div class="si-card">
+          <p class="si-label">🌙 Sehri (Imsak)</p>
+          <p class="si-time" id="sehriTime">5:45 AM</p>
+          <p class="text-xs mt-1" style="color:rgba(240,232,208,0.4);">End of Sehri</p>
+        </div>
+        <div class="si-card">
+          <p class="si-label">☀️ Iftar</p>
+          <p class="si-time" id="iftarTime">6:30 PM</p>
+          <p class="text-xs mt-1" style="color:rgba(240,232,208,0.4);">Break fast</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NEXT PRAYER COUNTDOWN ── -->
+    <section class="card p-5 fade-in delay-3">
+      <p class="section-title">Next Prayer</p>
+      <div class="flex items-center gap-3 mt-2 mb-4">
+        <div class="w-2 h-2 rounded-full animate-pulse" style="background:var(--gold);"></div>
+        <span id="nextPrayerName" class="font-display text-lg" style="color:var(--gold-light);">—</span>
+        <span id="nextPrayerTime" class="text-sm" style="color:rgba(240,232,208,0.55);">—</span>
+      </div>
+      <div class="flex gap-2 justify-center">
+        <div class="countdown-digit"><div class="num" id="cdH">00</div><div class="lbl">Hrs</div></div>
+        <div style="color:var(--gold);font-size:1.5rem;line-height:2.5rem;">:</div>
+        <div class="countdown-digit"><div class="num" id="cdM">00</div><div class="lbl">Min</div></div>
+        <div style="color:var(--gold);font-size:1.5rem;line-height:2.5rem;">:</div>
+        <div class="countdown-digit"><div class="num" id="cdS">00</div><div class="lbl">Sec</div></div>
+      </div>
+    </section>
+
+    <!-- ── PRAYER TIMINGS ── -->
+    <section class="fade-in delay-4">
+      <p class="section-title mb-2 px-1">Daily Prayer Timings</p>
+      <div class="card overflow-hidden" id="prayerList">
+
+        <!-- Fajr -->
+        <div class="prayer-row" data-prayer="fajr" data-time="06:15">
+          <div>
+            <div class="prayer-name">Fajr</div>
+            <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Dawn Prayer</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="prayer-time empty">— : —</span>
+          </div>
+        </div>
+
+        <!-- Ishraq -->
+        <div class="prayer-row" data-prayer="ishraq" data-time="07:20">
+          <div>
+            <div class="prayer-name">Ishraq</div>
+            <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Post-Sunrise</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="prayer-time empty">— : —</span>
+          </div>
+        </div>
+
+        <!-- Duha / Chasht -->
+        <div class="prayer-row" data-prayer="duha" data-time="09:30">
+          <div>
+            <div class="prayer-name">Duha (Chasht)</div>
+            <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Forenoon Prayer</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="prayer-time empty">— : —</span>
+          </div>
+        </div>
+
+        <!-- Dhuhr -->
+        <div class="prayer-row" data-prayer="dhuhr" data-time="13:30">
+          <div>
+            <div class="prayer-name">Dhuhr</div>
+            <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Midday Prayer</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="prayer-time empty">— : —</span>
+          </div>
+        </div>
+
+        <!-- Asr -->
+        <div class="prayer-row" data-prayer="asr" data-time="17:10">
+          <div>
+            <div class="prayer-name">Asr</div>
+            <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Afternoon Prayer</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="prayer-time empty">— : —</span>
+          </div>
+        </div>
+
+        <!-- Maghrib -->
+        <div class="prayer-row" data-prayer="maghrib" data-time="18:30">
+          <div>
+            <div class="prayer-name">Maghrib</div>
+            <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Sunset Prayer</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="prayer-time empty">— : —</span>
+          </div>
+        </div>
+
+        <!-- Awwabin -->
+        <div class="prayer-row" data-prayer="awwabin" data-time="18:50">
+          <div>
+            <div class="prayer-name">Awwabin</div>
+            <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Post-Maghrib</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="prayer-time empty">— : —</span>
+          </div>
+        </div>
+
+        <!-- Isha -->
+        <div class="prayer-row" data-prayer="isha" data-time="20:05">
+          <div>
+            <div class="prayer-name">Isha</div>
+            <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Night Prayer · Ramadan time</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="prayer-time empty">— : —</span>
+          </div>
+        </div>
+
+        <!-- Taraweeh -->
+        <div class="prayer-row" data-prayer="taraweeh" data-time="20:20">
+          <div>
+            <div class="prayer-name">Taraweeh</div>
+            <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Ramadan Night Prayer</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="prayer-time empty">— : —</span>
+          </div>
+        </div>
+
+        <!-- Tahajjud / Qiyam -->
+        <div class="prayer-row" data-prayer="tahajjud" data-time="03:30">
+          <div>
+            <div class="prayer-name">Tahajjud (Qiyam-ul-Layl)</div>
+            <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Late Night Vigil</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="prayer-time empty">— : —</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Note -->
+      <p class="text-xs text-center mt-3 px-2" style="color:rgba(240,232,208,0.35); line-height:1.6;">
+        Prayer times are set by the Masjid administration.<br/>Times shown are according to the Masjid's own schedule.
+      </p>
+    </section>
+
+    <!-- ── HOW TO ADD TIMES  (admin hint) ──
+    <section class="fade-in delay-5">
+      <div style="background:rgba(201,168,76,0.07);border:1px dashed rgba(201,168,76,0.3);border-radius:12px;padding:16px 20px;">
+        <p class="section-title mb-2">⚙ Admin: How to Add Prayer Times</p>
+        <p class="text-xs" style="color:rgba(240,232,208,0.55); line-height:1.8;">
+          In the HTML, find each <code style="color:var(--gold-light)">&lt;div class="prayer-row" data-prayer="…" data-time=""&gt;</code><br/>
+          Fill in the <code style="color:var(--gold-light)">data-time</code> attribute using 24-hour format, e.g. <code style="color:var(--gold-light)">data-time="05:12"</code>.<br/>
+          Similarly set <code style="color:var(--gold-light)">id="sehriTime"</code> and <code style="color:var(--gold-light)">id="iftarTime"</code> inner text.<br/>
+          The countdown &amp; highlight will update automatically.
+        </p>
+      </div>
+    </section> -->
+
+  </main>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="text-center py-6 px-4">
+    <div class="ornament-line max-w-xs mx-auto mb-4"><span>✦</span></div>
+    <p class="font-arabic text-xl mb-1" style="color:var(--gold);">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+    <p class="text-xs" style="color:rgba(240,232,208,0.3); letter-spacing:0.1em; font-family:'Cinzel',serif;">
+      MASJID JAMIA RANGWAR &nbsp;·&nbsp; RAMADAN 1447 AH © github.com/NTF28
+    </p>
+  </footer>
+
+  <!-- ═══════════════════════════════ JS ═══════════════════════════════ -->
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C96B;
+  --green-dark: #0D3B2E;
+  --green-mid: #155740;
+  --green-light: #1E7A55;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: #0a2e22;
+  background-image:
+    radial-gradient(ellipse at 10% 0%, rgba(21,87,64,0.6) 0%, transparent 60%),
+    radial-gradient(ellipse at 90% 100%, rgba(201,168,76,0.1) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.03'%3E%3Cpath d='M30 0l5 10 11 1.7-8 7.7 1.9 11L30 25.5 20.1 30.4 22 19.4l-8-7.7L25 10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  color: #f0e8d0;
+  font-family: 'Lato', sans-serif;
+  min-height: 100vh;
+}
+
+.ornament-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ornament-line::before,
+.ornament-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.ornament-line span {
+  color: var(--gold);
+  font-size: 1.2rem;
+}
+
+/* ── Card style ── */
+.card {
+  background: linear-gradient(135deg, rgba(21,87,64,0.5) 0%, rgba(13,59,46,0.7) 100%);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+}
+
+.prayer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  transition: background 0.3s;
+}
+.prayer-row:last-child { border-bottom: none; }
+.prayer-row.active {
+  background: linear-gradient(90deg, rgba(201,168,76,0.18) 0%, rgba(201,168,76,0.06) 100%);
+  border-left: 3px solid var(--gold);
+}
+.prayer-row.active .prayer-name { color: var(--gold-light); }
+
+.prayer-name { font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 0.05em; }
+.prayer-time {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #c5e8d5;
+  min-width: 70px;
+  text-align: right;
+}
+.prayer-time.empty { color: rgba(197,232,213,0.35); font-style: italic; font-weight: 300; font-size: 0.8rem; }
+
+/* ── Clock ── */
+#analogClock {
+  position: relative;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #1e5c40, #0a2e22);
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 30px rgba(201,168,76,0.2), inset 0 0 20px rgba(0,0,0,0.4);
+}
+.clock-number {
+  position: absolute;
+  font-family: 'Cinzel', serif;
+  color: var(--gold-light);
+  transform-origin: center;
+  font-size: clamp(8px, 2.5vw, 13px);
+  font-weight: 600;
+}
+.hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 4px;
+}
+.hour-hand { background: var(--gold); width: 4px; }
+.min-hand  { background: #a8d8c0; width: 3px; }
+.sec-hand  { background: #ff6b4a; width: 1.5px; }
+#clockDot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  z-index: 10;
+}
+
+/* ── Digital clock ── */
+#digitalClock {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: #c5e8d5;
+}
+#digitalClock .colon { color: var(--gold); animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ── Countdown ── */
+.countdown-digit {
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 10px;
+  padding: 8px 14px;
+  min-width: 64px;
+  text-align: center;
+}
+.countdown-digit .num {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  color: var(--gold-light);
+  line-height: 1;
+}
+.countdown-digit .lbl {
+  font-size: 0.65rem;
+  color: rgba(240,232,208,0.5);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Sehri / Iftar banner ── */
+.si-card {
+  background: linear-gradient(135deg, rgba(201,168,76,0.18), rgba(13,59,46,0.8));
+  border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 14px;
+  padding: 18px 22px;
+  flex: 1;
+}
+.si-label { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
+.si-time { font-family: 'Lato', sans-serif; font-size: 1.5rem; font-weight: 700; color: #e8f5f0; }
+.si-time.empty { font-size: 0.85rem; color: rgba(232,245,240,0.35); font-style: italic; font-weight: 300; }
+
+/* ── Hijri badge ── */
+.hijri-badge {
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 50px;
+  padding: 6px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  letter-spacing: 0.06em;
+}
+
+/* ── Toggle button ── */
+#clockToggle {
+  background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.08));
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold-light);
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  border-radius: 50px;
+  padding: 8px 22px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#clockToggle:hover {
+  background: rgba(201,168,76,0.3);
+  box-shadow: 0 0 16px rgba(201,168,76,0.25);
+}
+
+/* ── Section headers ── */
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* crescent / moon decorative svg */
+.crescent { color: var(--gold); opacity: 0.8; }
+
+/* ── Mosque header illustration ── */
+.mosque-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .prayer-row { padding: 12px 14px; }
+  .prayer-name { font-size: 0.8rem; }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeInUp 0.6s ease both; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+.active-badge {
+  background: rgba(201,168,76,0.2);
+  border: 1px solid rgba(201,168,76,0.5);
+  color: var(--gold-light);
+  font-size: 0.6rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 50px;
+  text-transform: uppercase;
+}
