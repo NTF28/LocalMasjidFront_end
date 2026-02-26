@@ -165,6 +165,7 @@ tailwind.config = {
     }
 }
 
+
 function saveSuggestion() {
   const box = document.getElementById('suggestionBox');
   const confirm = document.getElementById('suggestionConfirm');
@@ -181,10 +182,12 @@ function saveSuggestion() {
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
-  emailjs.send("service_g85fxd9", "qcualm5", {
+  emailjs.send  (
+  "service_g85fxd9", "qcualm5",
+  {
     message: text,
     time: new Date().toLocaleString()
-  }).then(() => {
+  }, "40o8gewJ5IR4mFHiu" ).then(() => {
     box.value = '';
     confirm.style.display = 'block';
     btn.textContent = 'Submit ✦';
