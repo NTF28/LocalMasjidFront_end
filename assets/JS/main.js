@@ -146,24 +146,7 @@ document.getElementById('cdM').textContent = pad(mins);
 document.getElementById('cdS').textContent = pad(secs);
 }
 
-// Initial parse
-parsePrayerTimes();
 
-tailwind.config = {
-    theme: {
-    extend: {
-        colors: {
-        gold: { DEFAULT: '#C9A84C', light: '#E8C96B', dark: '#A07830' },
-        mosque: { DEFAULT: '#0D3B2E', mid: '#155740', light: '#1E7A55', pale: '#E8F5F0' },
-        },
-        fontFamily: {
-        display: ['Cinzel', 'serif'],
-        body: ['Lato', 'sans-serif'],
-        arabic: ['Amiri', 'serif'],
-        }
-    }
-    }
-}
 
 
 function saveSuggestion() {
