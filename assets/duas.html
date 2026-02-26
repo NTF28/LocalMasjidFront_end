@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Duas — Masjid Jamia Rangwar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/CSS/duas.css">
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="pt-8 pb-4 px-4 text-center">
+    <div class="max-w-2xl mx-auto">
+      <div class="flex justify-start mb-5">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+      </div>
+
+      <p class="font-arabic text-2xl mb-1 fade-in" style="font-family:'Amiri',serif; color:var(--gold-light);">أَدْعِيَة مُبَارَكَة</p>
+      <h1 class="fade-in" style="font-family:'Cinzel',serif; font-size:clamp(1.6rem,6vw,2.4rem); font-weight:700; color:#f0e8d0; letter-spacing:0.05em;">
+        Blessed Duas
+      </h1>
+      <p class="fade-in" style="font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.2em; color:var(--gold); margin-top:4px;">
+        MASJID JAMIA RANGWAR · RAMADAN 1447 AH
+      </p>
+
+      <div class="ornament-line mt-4 mb-4 max-w-xs mx-auto"><span>☽</span></div>
+
+      <p class="fade-in" style="font-size:0.85rem; color:rgba(240,232,208,0.55); line-height:1.7; max-width:420px; margin:0 auto;">
+        A collection of powerful daily duas in Arabic, English, and Urdu for every moment of your day.
+      </p>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN ═══ -->
+  <main class="max-w-2xl mx-auto px-4 pb-24 mt-6">
+
+    <!-- Search -->
+    <div class="search-wrap mb-4 fade-in">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="Search duas…" />
+    </div>
+
+    <!-- Filter tabs -->
+
+    <div class="filter-tabs-wrapper mb-4 fade-in">
+      <div class="filter-tabs" id="filterTabs">
+        <button class="tab-btn active" data-filter="all">All Duas</button>
+        <button class="tab-btn" data-filter="ramadan">Ramadan</button>
+        <button class="tab-btn" data-filter="daily">Daily</button>
+        <button class="tab-btn" data-filter="knowledge">Knowledge</button>
+        <button class="tab-btn" data-filter="protection">Protection</button>
+        <button class="tab-btn" data-filter="forgiveness">Forgiveness</button>
+        <button class="tab-btn" data-filter="health">Health & Rizq</button>
+        <button class="tab-btn" data-filter="deceased">Deceased</button>
+      </div>
+    </div>
+ 
+
+    <!-- Stats
+    <div class="stats-bar fade-in" id="statsBar">
+      <div class="stat-item"><span id="totalCount">20</span> Duas</div>
+      <div class="stat-item"><span id="visibleCount">20</span> Shown</div>
+    </div>
+
+    <-- Duas Grid -->
+    <div class="duas-grid" id="duasGrid"></div>
+    <div class="empty-state hidden" id="emptyState">No duas found. Try a different search. 🌙</div>
+
+  </main>
+
+  <!-- Theme toggle -->
+  <button id="themeToggleBtn" aria-label="Toggle theme">🌙</button>
+  <script src="assets/JS/duas.js"></script>
+</body>
+</html>

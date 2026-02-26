@@ -1,19 +1,3 @@
-tailwind.config = {
-    theme: {
-    extend: {
-        colors: {
-        gold: { DEFAULT: '#C9A84C', light: '#E8C96B', dark: '#A07830' },
-        mosque: { DEFAULT: '#0D3B2E', mid: '#155740', light: '#1E7A55', pale: '#E8F5F0' },
-        },
-        fontFamily: {
-        display: ['Cinzel', 'serif'],
-        body: ['Lato', 'sans-serif'],
-        arabic: ['Amiri', 'serif'],
-        }
-    }
-    }
-}
-
 // ─── Hijri Date ───────────────────────────────────────────────────
 function getHijriDate() {
 try {
@@ -164,3 +148,52 @@ document.getElementById('cdS').textContent = pad(secs);
 
 // Initial parse
 parsePrayerTimes();
+
+tailwind.config = {
+    theme: {
+    extend: {
+        colors: {
+        gold: { DEFAULT: '#C9A84C', light: '#E8C96B', dark: '#A07830' },
+        mosque: { DEFAULT: '#0D3B2E', mid: '#155740', light: '#1E7A55', pale: '#E8F5F0' },
+        },
+        fontFamily: {
+        display: ['Cinzel', 'serif'],
+        body: ['Lato', 'sans-serif'],
+        arabic: ['Amiri', 'serif'],
+        }
+    }
+    }
+}
+
+function saveSuggestion() {
+  const box = document.getElementById('suggestionBox');
+  const confirm = document.getElementById('suggestionConfirm');
+  const btn = document.querySelector('[onclick="saveSuggestion()"]');
+  const text = box.value.trim();
+
+  if (!text) {
+    box.style.borderColor = 'rgba(255,100,100,0.6)';
+    setTimeout(() => box.style.borderColor = 'rgba(201,168,76,0.2)', 2000);
+    return;
+  }
+
+  // Disable button while sending
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  emailjs.send("service_g85fxd9", "qcualm5", {
+    message: text,
+    time: new Date().toLocaleString()
+  }).then(() => {
+    box.value = '';
+    confirm.style.display = 'block';
+    btn.textContent = 'Submit ✦';
+    btn.disabled = false;
+    setTimeout(() => confirm.style.display = 'none', 3500);
+  }).catch((err) => {
+    console.error('EmailJS error:', err);
+    btn.textContent = 'Submit ✦';
+    btn.disabled = false;
+    alert('Could not send. Please check your connection and try again.');
+  });
+}

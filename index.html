@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Masjid Jamia Rangwar
-  </title>
-  <link rel="icon" type="image/x-icon" href="assets/images/favicon_1.png">
+  <title>Masjid Jamia Rangwar</title>
+  <link rel="shortcut icon" href="assets/images/favicon_1.png" type="image/x-icon">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init("40o8gewJ5IR4mFHiu");</script>
+  <link rel="stylesheet" href="assets/CSS/main.css">
 </head>
 <body class="min-h-screen">
 
@@ -133,7 +134,7 @@
             <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Dawn Prayer</div>
           </div>
           <div class="flex items-center gap-3">
-            <span class="prayer-time empty">— : —</span>
+            <span class="prayer-time empty">6 :15AM</span>
           </div>
         </div>
 
@@ -166,7 +167,7 @@
             <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Midday Prayer</div>
           </div>
           <div class="flex items-center gap-3">
-            <span class="prayer-time empty">— : —</span>
+            <span class="prayer-time empty">1 : 30PM</span>
           </div>
         </div>
 
@@ -177,7 +178,7 @@
             <div class="text-xs mt-0.5" style="color:rgba(240,232,208,0.4);">Afternoon Prayer</div>
           </div>
           <div class="flex items-center gap-3">
-            <span class="prayer-time empty">— : —</span>
+            <span class="prayer-time empty">5 : 10PM</span>
           </div>
         </div>
 
@@ -244,31 +245,80 @@
       </p>
     </section>
 
-    <!-- ── HOW TO ADD TIMES  (admin hint) ──
-    <section class="fade-in delay-5">
-      <div style="background:rgba(201,168,76,0.07);border:1px dashed rgba(201,168,76,0.3);border-radius:12px;padding:16px 20px;">
-        <p class="section-title mb-2">⚙ Admin: How to Add Prayer Times</p>
-        <p class="text-xs" style="color:rgba(240,232,208,0.55); line-height:1.8;">
-          In the HTML, find each <code style="color:var(--gold-light)">&lt;div class="prayer-row" data-prayer="…" data-time=""&gt;</code><br/>
-          Fill in the <code style="color:var(--gold-light)">data-time</code> attribute using 24-hour format, e.g. <code style="color:var(--gold-light)">data-time="05:12"</code>.<br/>
-          Similarly set <code style="color:var(--gold-light)">id="sehriTime"</code> and <code style="color:var(--gold-light)">id="iftarTime"</code> inner text.<br/>
-          The countdown &amp; highlight will update automatically.
-        </p>
-      </div>
-    </section> -->
-
   </main>
+
+  <!-- ═══════════════════════════════ DUAS BUTTON ═══════════════════════════════ -->
+
+  <a href="duas.html" id="duasFloatBtn">
+    <span class="dua-icon">🤲</span>
+    <span>DUAS</span>
+  </a>
+
+  <!-- ── Suggestion Box ── -->
+<section class="fade-in delay-5 mt-6">
+  <p class="section-title mb-3 px-1">💬 Suggestions</p>
+  <div class="card p-5">
+    <p style="font-family:'Cinzel',serif; font-size:0.78rem; color:rgba(240,232,208,0.5); letter-spacing:0.06em; margin-bottom:12px;">
+      Have an idea? We'd love to hear from you.
+    </p>
+    <textarea
+      id="suggestionBox"
+      rows="4"
+      placeholder="Comment your suggestion or edit — what would you like to see?"
+      style="
+        width: 100%;
+        background: rgba(21,87,64,0.25);
+        border: 1px solid rgba(201,168,76,0.2);
+        border-radius: 12px;
+        padding: 14px 16px;
+        color: rgba(240,232,208,0.9);
+        font-family: 'Lato', sans-serif;
+        font-size: 0.88rem;
+        line-height: 1.6;
+        resize: vertical;
+        outline: none;
+        transition: border-color 0.25s;
+        caret-color: var(--gold);
+      "
+      onfocus="this.style.borderColor='rgba(201,168,76,0.55)'"
+      onblur="this.style.borderColor='rgba(201,168,76,0.2)'"
+    ></textarea>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+      <button
+        onclick="saveSuggestion()"
+        style="
+          background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.08));
+          border: 1px solid rgba(201,168,76,0.4);
+          color: var(--gold-light);
+          font-family: 'Cinzel', serif;
+          font-size: 0.68rem;
+          letter-spacing: 0.1em;
+          padding: 8px 20px;
+          border-radius: 50px;
+          cursor: pointer;
+          transition: all 0.3s;
+        "
+        onmouseover="this.style.background='rgba(201,168,76,0.28)'"
+        onmouseout="this.style.background='linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.08))'"
+      >
+        Submit ✦
+      </button>
+    </div>
+    <!-- confirmation message, hidden by default -->
+    <p id="suggestionConfirm" style="display:none; margin-top:10px; font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.08em; color:#6ee7b7;">
+      ✓ JazakAllah Khair — your suggestion has been noted!
+    </p>
+  </div>
 
   <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
   <footer class="text-center py-6 px-4">
     <div class="ornament-line max-w-xs mx-auto mb-4"><span>✦</span></div>
     <p class="font-arabic text-xl mb-1" style="color:var(--gold);">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
     <p class="text-xs" style="color:rgba(240,232,208,0.3); letter-spacing:0.1em; font-family:'Cinzel',serif;">
-      MASJID JAMIA RANGWAR &nbsp;·&nbsp; RAMADAN 1447 AH © github.com/NTF28
+      MASJID JAMIA RANGWAR &nbsp;·&nbsp; RAMADAN 1447 AH &nbsp;·&nbsp; <a href="https://github.com/NTF28" target="_blank">Github.com/ntf28</a> 
     </p>
   </footer>
 
-  <!-- ═══════════════════════════════ JS ═══════════════════════════════ -->
-<script src="main.js"></script>
+  <script src="assets/JS/main.js"></script>
 </body>
 </html>
