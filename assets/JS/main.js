@@ -1,14 +1,23 @@
 // ─── Hijri Date ───────────────────────────────────────────────────
 function getHijriDate() {
-try {
-    const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
-    day: 'numeric', month: 'long', year: 'numeric'
-    });
-    return formatter.format(new Date());
-} catch(e) {
-    return 'Ramadan 1447 AH';
+    try {
+        const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
+            day: 'numeric', 
+            month: 'long', 
+            year: 'numeric'
+        });
+        
+        // Get the formatted date (e.g., "Ramadan 12, 1447 AH")
+        const formattedDate = formatter.format(new Date());
+        
+        // Replace the space before the day number with " Day "
+        return formattedDate.replace(/(\w+)\s(\d+)/, '$1 Day $2');
+        
+    } catch(e) {
+        return 'Ramadan Day 1, 1447 AH';
+    }
 }
-}
+
 document.getElementById('hijriDate').textContent = getHijriDate();
 
 // ─── Analog Clock Setup ───────────────────────────────────────────
