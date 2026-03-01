@@ -147,39 +147,4 @@ document.getElementById('cdS').textContent = pad(secs);
 }
 
 
-
-
-function saveSuggestion() {
-  const box = document.getElementById('suggestionBox');
-  const confirm = document.getElementById('suggestionConfirm');
-  const btn = document.querySelector('[onclick="saveSuggestion()"]');
-  const text = box.value.trim();
-
-  if (!text) {
-    box.style.borderColor = 'rgba(255,100,100,0.6)';
-    setTimeout(() => box.style.borderColor = 'rgba(201,168,76,0.2)', 2000);
-    return;
-  }
-
-  // Disable button while sending
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-
-  emailjs.send  (
-  "service_g85fxd9", "qcualm5",
-  {
-    message: text,
-    time: new Date().toLocaleString()
-  }, "40o8gewJ5IR4mFHiu" ).then(() => {
-    box.value = '';
-    confirm.style.display = 'block';
-    btn.textContent = 'Submit ✦';
-    btn.disabled = false;
-    setTimeout(() => confirm.style.display = 'none', 3500);
-  }).catch((err) => {
-    console.error('EmailJS error:', err);
-    btn.textContent = 'Submit ✦';
-    btn.disabled = false;
-    alert('Could not send. Please check your connection and try again.');
-  });
-}
+// Suggestion Box!
