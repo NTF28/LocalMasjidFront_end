@@ -1,7 +1,6 @@
 <div align="center">
-
-<!-- Add a screenshot of your site here -->
-![Masjid Jamia Rangwar](\screenshot.png)
+=======
+![Masjid Jamia Rangwar](https://raw.githubusercontent.com/NTF28/LocalMasjidFront_end/screenshot.png)
 
 # 🕌 Masjid Jamia Rangwar
 
