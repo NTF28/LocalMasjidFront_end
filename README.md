@@ -1,6 +1,6 @@
 <div align="center">
-=======
-![Masjid Jamia Rangwar](https://raw.githubusercontent.com/NTF28/LocalMasjidFront_end/screenshot.png)
+
+![Masjid Jamia Rangwar](https://raw.githubusercontent.com/NTF28/LocalMasjidFront_end/main/screenshot.png)
 
 # 🕌 Masjid Jamia Rangwar
 
